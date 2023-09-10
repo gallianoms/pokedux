@@ -1,7 +1,12 @@
 import { useDispatch } from 'react-redux'
 import { searchPokemon } from '../features/pokemon/pokemonSlice'
+import { Pokemon } from '../interfaces/pokemon'
 
-const Search = ({ pokemons }) => {
+interface SearchProps {
+  pokemons: Pokemon[]
+}
+
+const Search = ({ pokemons }: SearchProps) => {
   const dispatch = useDispatch()
 
   return (

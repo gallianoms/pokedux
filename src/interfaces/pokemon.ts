@@ -1,11 +1,11 @@
-export interface Pokemon {
+export interface Data {
   count: number
   next: any
   previous: any
-  results: Result[]
+  results: Pokemon[]
 }
 
-export interface Result {
+export interface Pokemon {
   name: string
   url: string
 }

@@ -4,7 +4,7 @@ import PokemonList from './features/pokemon/PokemonList'
 import Search from './components/Search'
 
 function App() {
-  const { data, error, isLoading, isFetching, isSuccess, isError } =
+  const { data, error, isLoading, isFetching, isError } =
     useGetPokemonQuery(null)
 
   if (isLoading || isFetching)
@@ -99,17 +99,15 @@ function App() {
 
   if (isError) return <h2>{error.toString()}</h2>
 
-  if (isSuccess) {
-    return (
-      <div className='App'>
-        <div className='flex justify-center mt-4'>
-          <img className='w-32' src='logo.svg' alt='' />
-        </div>
-        <Search pokemons={data.results} />
-        <PokemonList pokemons={data.results} />
+  return (
+    <div className='App'>
+      <div className='flex justify-center mt-4'>
+        <img className='w-32' src='logo.svg' alt='' />
       </div>
-    )
-  }
+      <Search pokemons={data.results} />
+      <PokemonList pokemons={data.results} />
+    </div>
+  )
 }
 
 export default App

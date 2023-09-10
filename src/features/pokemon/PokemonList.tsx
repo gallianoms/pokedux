@@ -1,9 +1,14 @@
 import { useSelector } from 'react-redux'
 import Card from '../../components/Card'
 import { selectSearch, selectSearchList } from './pokemonSlice'
+import { Pokemon } from '../../interfaces/pokemon'
 
-const PokemonList = ({ pokemons }) => {
-  const searchList = useSelector(selectSearchList)
+interface PokemonListProps {
+  pokemons: Pokemon[]
+}
+
+const PokemonList = ({ pokemons }: PokemonListProps) => {
+  const searchList: Pokemon[] | [] = useSelector(selectSearchList)
   const search = useSelector(selectSearch)
 
   if (search.length > 0 && searchList.length === 0) {

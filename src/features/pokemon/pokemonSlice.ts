@@ -1,4 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { Pokemon } from '../../interfaces/pokemon'
+
+interface PokemonState {
+  favorites: string[]
+  search: string
+  searchList: Pokemon[]
+}
 
 export const pokemonSlice = createSlice({
   name: 'pokemon',
@@ -6,9 +13,9 @@ export const pokemonSlice = createSlice({
     favorites: [],
     search: '',
     searchList: [],
-  },
+  } as PokemonState,
   reducers: {
-    toggleFavorite: (state, action) => {
+    toggleFavorite: (state, action: PayloadAction<string>) => {
       if (state.favorites.length === 0) {
         state.favorites.push(action.payload)
       } else if (
@@ -22,7 +29,10 @@ export const pokemonSlice = createSlice({
         state.favorites.push(action.payload)
       }
     },
-    searchPokemon: (state, action) => {
+    searchPokemon: (
+      state,
+      action: PayloadAction<{ searchValue: string; pokemons: Pokemon[] }>
+    ) => {
       const { searchValue, pokemons } = action.payload
       state.search = searchValue
 
@@ -35,9 +45,12 @@ export const pokemonSlice = createSlice({
 
 export const { toggleFavorite, searchPokemon } = pokemonSlice.actions
 
-export const selectPokemon = state => state.pokemon.favorites
+export const selectPokemon = (state: { pokemon: PokemonState }) =>
+  state.pokemon.favorites
 
-export const selectSearch = state => state.pokemon.search
-export const selectSearchList = state => state.pokemon.searchList
+export const selectSearch = (state: { pokemon: PokemonState }) =>
+  state.pokemon.search
+export const selectSearchList = (state: { pokemon: PokemonState }) =>
+  state.pokemon.searchList
 
 export default pokemonSlice.reducer
